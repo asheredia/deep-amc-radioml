@@ -1,0 +1,7 @@
+tensorflow[and-cuda]==2.17.0
+numpy==1.26.4
+pandas==1.5.3
+scikit-learn==1.7.2
+matplotlib==3.10.8
+h5py==3.16.0
+jupyterlab
