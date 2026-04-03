@@ -19,7 +19,7 @@ This repository benchmarks six deep learning architectures on RadioML 2018.01A (
 | Input shape | (1024, 2) — I/Q samples |
 | SNR range | −20 dB to +30 dB (step 2 dB) |
 | Split | 70% train / 15% val / 15% test (stratified by class) |
-| Normalization | RMS per sample |
+| Normalization | RMS per sample (applied, not provided by dataset) |
 | Total samples | ~2.55 M |
  
 <details>
