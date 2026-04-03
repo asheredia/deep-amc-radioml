@@ -21,9 +21,18 @@ This repository benchmarks six deep learning architectures on RadioML 2018.01A (
 | Split | 70% train / 15% val / 15% test (stratified by class) |
 | Normalization | RMS per sample (applied, not provided by dataset) |
 | Total samples | ~2.55 M |
- 
+
+> **Some preprocessing notes:**
+> - **Split:** The dataset is distributed as a single HDF5 file, so it does not contain a 
+>   predefined train/val/test partition. The 70/15/15 split is applied via 
+>   a helper function.
+> - **Normalization:** RMS normalization is not provided by the dataset. It is 
+>   applied per sample during loading in order 
+>   to remove amplitude dependence across SNR levels, making the model to focus in modulation structure rather than 
+>   signal power.
+
 <details>
-<summary>Full list of 24 modulation classes</summary>
+<summary>Full list of 24 modulation classes (click to see)</summary>
  
 OOK, 4ASK, 8ASK, BPSK, QPSK, 8PSK, 16PSK, 32PSK, 16APSK, 32APSK, 64APSK, 128APSK, 16QAM, 32QAM, 64QAM, 128QAM, 256QAM, AM-SSB-WC, AM-SSB-SC, AM-DSB-WC, AM-DSB-SC, FM, GMSK, OQPSK
  
@@ -138,7 +147,7 @@ All models follow the same training protocol:
 | ResNet1D | 158K | 53.07 | 2.88 | 347 | No |
 | **Transformer** | **289K** | **34.98** | **1.48** | **671** | **No** |
  
-> The Transformer achieves the lowest MFLOPs and second-highest throughput despite having the most parameters. It is a direct consequence of its non-recurrent and fully parallelizable architecture.
+> The Transformer achieves the lowest MFLOPs and second-highest throughput despite having the most parameters. It reflects a direct consequence of its non-recurrent and fully parallelizable architecture.
  
 ### Overall Test Accuracy (all SNRs)
  
@@ -151,7 +160,7 @@ All models follow the same training protocol:
 | Transformer | 59.2% |
 | CNN | 57.9% |
  
-> Overall accuracy is averaged across the full SNR range (−20 to +30 dB), heavily weighted by the low-SNR regime where all models perform similarly.
+> Overall accuracy is averaged across the full SNR range (−20 to +30 dB), highly influenced by the low-SNR regime where all models perform similarly.
  
 ### Accuracy vs SNR
  
@@ -192,7 +201,7 @@ SNR (dB) │  CNN  │ CNN+LSTM │  LSTM  │ CNN+GRU │ ResNet1D │ Transfor
  
 **At low SNR (≤ −6 dB):** all models converge to similar accuracy (~4–28%). The classification problem is dominated by noise and architecture choice has minimal impact.
  
-**In the transition region (−4 to +6 dB):** LSTM-based models pull ahead, benefiting from explicit sequential modeling of inter-symbol dependencies. The gap widens significantly above 0 dB.
+**In the transition region (−4 to +6 dB):** LSTM-based models stand out, benefiting from explicit sequential modeling of inter-symbol dependencies. The gap is more noticeable above 0 dB.
  
 **At high SNR (≥ +10 dB):** LSTM, CNN+LSTM, CNN+GRU and ResNet1D saturate around 96–97%. The CNN and Transformer plateau at ~91% — the Transformer's patch-based tokenization fragments inter-symbol phase transitions, limiting discrimination of high-order PSK schemes (16PSK, 32PSK).
  
@@ -202,7 +211,7 @@ SNR (dB) │  CNN  │ CNN+LSTM │  LSTM  │ CNN+GRU │ ResNet1D │ Transfor
  
 Across all models and SNR levels:
  
-- **AM-DSB-WC ↔ AM-DSB-SC** — the hardest pair; time-domain similarity makes them nearly indistinguishable under noise
+- **AM-DSB-WC ↔ AM-DSB-SC** — the hardest pair (as well as the SSB versions); time-domain similarity makes them nearly indistinguishable under noise
 - **High-order QAM (128–256QAM)** — constellation density causes overlap at moderate SNR
 - **8PSK ↔ 16PSK / 32PSK** — phase boundary ambiguity, more pronounced in the Transformer due to patch-based tokenization
  
