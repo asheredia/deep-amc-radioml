@@ -40,6 +40,15 @@ RadioML-Classifier/
 ├── Transformers.ipynb            # Transformer training & evaluation
 ├── ResNet.ipynb                  # ResNet1D training & evaluation
 ├── Baselines.ipynb               # CNN, LSTM, CNN+LSTM, CNN+GRU training & evaluation
+├── Comparison.ipynb              # Cross-model accuracy vs SNR + efficiency benchmark
+├── results/
+│   ├── results_cnn_acc.npy
+│   ├── results_cnn_lstm_acc.npy
+│   ├── results_lstm_acc.npy
+│   ├── results_cnn_gru_acc.npy
+│   ├── results_resnet_acc.npy
+│   ├── results_transformers_acc.npy
+│   └── models_measurements.csv  # MFLOPs, latency, throughput per model
 └── src/
     ├── config.py                 # set_seed, setup_gpu, setup_environment
     ├── dataset.py                # RadioMLConfig: classes, SNR range; load_dataset,
@@ -53,8 +62,8 @@ RadioML-Classifier/
         └── baselines.py          # cnn_model, lstm_model, cnn_lstm_model, cnn_gru_model
 ```
  
-> All notebooks live at the root level and share the entire `src/` stack — only the model file differs.
- 
+> All notebooks live at the root level and share the entire `src/` stack — only the model file differs. Pre-computed accuracy results (`.npy`) and efficiency metrics (`.csv`) are included in `results/` so the comparison notebook runs without retraining.
+
 ---
  
 ## Models
