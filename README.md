@@ -1,10 +1,10 @@
 # RadioML-Classifier
  
-Deep learning benchmark for **Automatic Modulation Classification (AMC)** on the [RadioML 2018.01A](https://www.kaggle.com/datasets/pinxau1000/radioml2018) dataset (`GOLD_XYZ_OSC.0001_1024.hdf5`). Six architectures are evaluated and compared — from CNN and LSTM baselines to a patch-based Transformer — sharing the same modular codebase.
+This is a Deep learning benchmark for **Automatic Modulation Classification (AMC)** on the [RadioML 2018.01A](https://www.kaggle.com/datasets/pinxau1000/radioml2018) dataset (`GOLD_XYZ_OSC.0001_1024.hdf5`). Six architectures are evaluated and compared — from CNN and LSTM architectures to a patch-based Transformer — sharing the same modular codebase.
  
 ## Overview
  
-Automatic Modulation Classification (AMC) is the task of identifying the modulation scheme of a received radio signal directly from raw I/Q samples, without prior knowledge of transmission parameters. It is a key component in cognitive radio, spectrum monitoring, and signal intelligence systems.
+The aim of Automatic Modulation Classification (AMC) is to identify the modulation scheme of a received radio signal directly from raw I/Q samples, without prior knowledge of transmission parameters. It is a key component in cognitive radio, spectrum monitoring, and signal intelligence systems.
  
 This repository benchmarks six deep learning architectures on RadioML 2018.01A, a standard AMC benchmark covering 24 modulation types across a wide SNR range (−20 to +30 dB), analyzing the trade-off between classification accuracy and computational efficiency.
  
@@ -62,7 +62,7 @@ RadioML-Classifier/
         └── baselines.py          # cnn_model, lstm_model, cnn_lstm_model, cnn_gru_model
 ```
  
-> All notebooks live at the root level and share the entire `src/` stack — only the model file differs. Pre-computed accuracy results (`.npy`) and efficiency metrics (`.csv`) are included in `results/` so the comparison notebook runs without retraining.
+> All notebooks live at the root level and share the entire `src/` stack — only the model file differs. Pre-computed accuracy results (`.npy`) and efficiency metrics (`.csv`) are included in `results/`.
 
 ---
  
@@ -138,7 +138,7 @@ All models follow the same training protocol:
 | ResNet1D | 158K | 53.07 | 2.88 | 347 | No |
 | **Transformer** | **289K** | **34.98** | **1.48** | **671** | **No** |
  
-> The Transformer achieves the lowest MFLOPs and second-highest throughput despite having the most parameters — a direct consequence of its non-recurrent, fully parallelizable architecture.
+> The Transformer achieves the lowest MFLOPs and second-highest throughput despite having the most parameters. It is a direct consequence of its non-recurrent and fully parallelizable architecture.
  
 ### Overall Test Accuracy (all SNRs)
  
@@ -190,13 +190,13 @@ SNR (dB) │  CNN  │ CNN+LSTM │  LSTM  │ CNN+GRU │ ResNet1D │ Transfor
  
 ### Key Findings
  
-**At low SNR (≤ −6 dB):** all models converge to similar accuracy (~4–28%). The classification problem is noise-dominated and architecture choice has minimal impact.
+**At low SNR (≤ −6 dB):** all models converge to similar accuracy (~4–28%). The classification problem is dominated by noise and architecture choice has minimal impact.
  
 **In the transition region (−4 to +6 dB):** LSTM-based models pull ahead, benefiting from explicit sequential modeling of inter-symbol dependencies. The gap widens significantly above 0 dB.
  
 **At high SNR (≥ +10 dB):** LSTM, CNN+LSTM, CNN+GRU and ResNet1D saturate around 96–97%. The CNN and Transformer plateau at ~91% — the Transformer's patch-based tokenization fragments inter-symbol phase transitions, limiting discrimination of high-order PSK schemes (16PSK, 32PSK).
  
-**Efficiency vs. accuracy trade-off:** The Transformer offers the best accuracy/compute ratio for latency-constrained scenarios (1.48 ms, 671 samples/s, 34.98 MFLOPs). LSTM achieves the highest accuracy but at 28.2 ms latency — 19× slower than the Transformer — making it unsuitable for real-time deployment.
+**Efficiency vs. accuracy trade-off:** The Transformer offers the best accuracy/compute ratio for latency-constrained scenarios (1.48 ms, 671 samples/s, 34.98 MFLOPs). LSTM achieves the highest accuracy but at 28.2 ms latency (19× slower than the Transformer) making it unsuitable for real-time deployment.
  
 ### Persistent Confusion Patterns
  
@@ -222,7 +222,7 @@ Across all models and SNR levels:
  
 ```bash
 git clone https://github.com/asheredia/deep-amc-radioml.git
-cd RadioML-Classifier
+cd deep-amc-radioml
 pip install -r requirements.txt
 ```
  
