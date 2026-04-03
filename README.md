@@ -1,12 +1,12 @@
 # RadioML-Classifier
  
-This is a Deep learning benchmark for **Automatic Modulation Classification (AMC)** on the [RadioML 2018.01A](https://www.kaggle.com/datasets/pinxau1000/radioml2018) dataset (`GOLD_XYZ_OSC.0001_1024.hdf5`). Six architectures are evaluated and compared — from CNN and LSTM architectures to a patch-based Transformer — sharing the same modular codebase.
+This is a Deep learning benchmark for **Automatic Modulation Classification (AMC)** on the [RadioML 2018.01A](https://www.kaggle.com/datasets/pinxau1000/radioml2018) dataset (`GOLD_XYZ_OSC.0001_1024.hdf5`). Six architectures are evaluated and compared: from CNN and LSTM architectures to a patch-based Transformer, sharing the same modular codebase.
  
 ## Overview
  
-The aim of Automatic Modulation Classification (AMC) is to identify the modulation scheme of a received radio signal directly from raw I/Q samples, without prior knowledge of transmission parameters. It is a key component in cognitive radio, spectrum monitoring, and signal intelligence systems.
+The aim of Automatic Modulation Classification (AMC) is to identify the modulation scheme of a received radio signal directly from raw In-phase and Quadrature (I/Q) samples, without prior knowledge of transmission parameters. It is a key component in cognitive radio, spectrum monitoring, and signal intelligence systems.
  
-This repository benchmarks six deep learning architectures on RadioML 2018.01A, a standard AMC benchmark covering 24 modulation types across a wide SNR range (−20 to +30 dB), analyzing the trade-off between classification accuracy and computational efficiency.
+This repository benchmarks six deep learning architectures on RadioML 2018.01A (from DeepSig), a standard AMC benchmark covering 24 modulation types across a wide SNR range (−20 to +30 dB), analyzing the trade-off between classification accuracy and computational efficiency.
  
 ---
  
