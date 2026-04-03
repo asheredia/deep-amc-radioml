@@ -1,0 +1,7 @@
+name,kparams,disk_mb,MFLOPs,MMACs,rnn_estimated,latency_ms,throughput
+cnn,161.49,0.66,77.17,38.58,False,0.77,1293.85
+cnn_lstm,266.83,1.07,118.48,59.24,True,4.45,224.7
+lstm,259.48,1.03,252.7,126.35,True,28.2,35.45
+cnn_gru,173.65,0.71,88.86,44.43,True,7.65,130.61
+resnet,157.59,1.0,53.07,26.53,False,2.88,346.91
+transformers,289.04,1.36,34.98,17.48,False,1.48,671.41
